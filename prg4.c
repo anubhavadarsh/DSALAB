@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 
 
@@ -27,8 +28,16 @@ void infixPostfix(char infix[])
 {
     char postfix[100];
     int top = -1;
-    for(int i = 0; infix[i] != '\0'; i++)
+    for(int i = 0; i < strlen(infix); i++)
     {
+        if(i == strlen(infix)-1)
+        {
+            while(top != -1)
+            {
+                printf("%c",postfix[top--]);
+            }
+        }
+
         if(precedence(infix[i]) == 0)
         {
             if(infix[i] == '(')
@@ -48,6 +57,7 @@ void infixPostfix(char infix[])
                 printf("%c",infix[i]);
             }
         }
+
         else
         {
             if(top == -1)
@@ -87,11 +97,6 @@ void infixPostfix(char infix[])
             }
             
         }
-        
-    }
-    while(top != -1)
-    {
-        printf("%c",postfix[top--]);
     }
 }
 
